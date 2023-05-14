@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "../VS"
+		},
+		{
+			"path": "../Work"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"stdexcept": "cpp",
+			"ostream": "cpp",
+			"*.tcc": "cpp",
+			"istream": "cpp",
+			"streambuf": "cpp",
+			"random": "cpp",
+			"array": "cpp",
+			"string": "cpp"
+		}
+	}
+}
