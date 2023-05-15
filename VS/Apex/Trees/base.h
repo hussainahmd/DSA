@@ -61,6 +61,17 @@ Node *minValueNode(Node *&root)
     return current;
 }
 
+Node *maxValueNode(Node *&root)
+{
+    Node *current = root;
+
+    // Loop down to find the leftmost leaf
+    while (current != NULL && current->right != NULL)
+        current = current->right;
+
+    return current;
+}
+
 //******************************************************************//
 
 int totalNodes(Node *&root)
@@ -318,6 +329,10 @@ void printUtil(Node *&root, int space, int count)
 
 void print(Node *&root)
 {
+    if(!root){
+        cout << "Tree is empty!\n";
+        return;
+    }
     printUtil(root, 0, 10);
 }
 

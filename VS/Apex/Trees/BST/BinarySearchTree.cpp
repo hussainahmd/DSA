@@ -17,25 +17,26 @@ void insert(Node *&root, int item)
 
 void insertItr(Node *&root, int item)
 {
-    if(!root){
+    if (!root)
+    {
         root = new Node(item);
         return;
     }
 
     Node *previous, *current = root;
-    while(current != NULL)
+    while (current != NULL)
     {
-        if(item < current->data)
+        if (item < current->data)
             current = current->left;
-        
-        if(item > current->data)
+
+        if (item > current->data)
             current = current->right;
     }
 
-    if(item < previous->data)
+    if (item < previous->data)
         previous->left = new Node(item);
-    
-    if(item > previous->data)
+
+    if (item > previous->data)
         previous->right = new Node(item);
 }
 
@@ -43,23 +44,24 @@ void insertItr(Node *&root, int item)
 
 Node *removeNodeItr(Node *root, int key)
 {
-    if(!root)
+    if (!root)
     {
         cout << "Tree is empty!\n";
         return NULL;
     }
     Node *previous, *current = root;
 
-    while(!current && current->data != key)
+    while (!current && current->data != key)
     {
-        if(key < current->data)
+        if (key < current->data)
             current = current->left;
-        
-        if(key > current->data)
+
+        if (key > current->data)
             current = current->right;
     }
 }
 
+//if root has both childs then swap minValueNode from right subtree and delete it
 Node *removeNode(Node *root, int key)
 {
     if (!root)
@@ -73,21 +75,37 @@ Node *removeNode(Node *root, int key)
 
     else
     {
-        if (root->left == NULL)
+        if (root->left == NULL && root->right != NULL)
         {
             Node *temp = root->right;
             delete root;
             return temp;
         }
-        else if (root->right == NULL)
+        else if (root->right == NULL && root->left != NULL)
         {
-            Node *temp = root->left;
+            //this is fine but not for the below case
+            /* Node *temp = root->left;
             delete root;
-            return temp;
+            return temp;*/
+
+            //if main(topmost) root->right is NULL then swap the max node from left subtree
+            //else, normal case that is to remove from right subtree
+            Node *temp = maxValueNode(root->left);
+            root->data = temp->data;
+            root->left = removeNode(root->left, temp->data);
+            return root;
+            
         }
+        else if (root->right == NULL && root->left == NULL)
+        {
+            delete root;
+            return NULL;
+        }
+
         Node *temp = minValueNode(root->right);
         root->data = temp->data;
         root->right = removeNode(root->right, temp->data);
+        return root;
     }
     return root;
 }
@@ -123,7 +141,10 @@ int main()
     inOrder(root);
     cout << "\n\n";
 
-    removeNode(root, 70);
+    removeNode(root, 50);
+    //removeNode(root, 80);
+    //root = removeNode(root, 30);
+
     print(root);
     cout << "inorder :\n";
     inOrder(root);
