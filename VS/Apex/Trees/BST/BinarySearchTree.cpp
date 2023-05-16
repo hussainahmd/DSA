@@ -53,66 +53,85 @@ void removeNodeItr(Node *root, int key)
 
     while (current != NULL)
     {
-        if (key < current->data){
+        if (key < current->data)
+        {
             parent = current;
             current = current->left;
         }
 
-        else if (key > current->data){
+        else if (key > current->data)
+        {
             parent = current;
             current = current->right;
         }
         else
-            break; //Element found in the tree at current pointer
+            break; // Element found in the tree at current pointer
     }
-    if(current == NULL){
+    if (current == NULL)
+    {
         cout << "Key not found\n";
         return;
     }
-
-    Node *temp = current;
-    //Case1: current has no left child
-    if(current->left == NULL){
-
-        if(parent == NULL){
+    // Case1: current has no left child
+    // will also work for if no children
+    if (current->left == NULL)
+    {
+        Node *temp = current;
+        if (parent == NULL)
+        {
             root = current->right;
         }
-        else{
-            if(key < parent->data)
+        else
+        {
+            if (key < parent->data)
                 parent->left = current->right;
             else
                 parent->right = current->right;
         }
+        delete temp;
     }
-    //Case2: current has no right child
-    else if(current->right == NULL){
-
-        if(parent == NULL){
+    // Case2: current has no right child
+    else if (current->right == NULL)
+    {
+        Node *temp = current;
+        if (parent == NULL)
+        {
             root = current->left;
         }
-        else{
-            if(key < parent->data)
+        else
+        {
+            if (key < parent->data)
                 parent->left = current->left;
             else
                 parent->right = current->left;
-        }   
+        }
+        delete temp;
     }
-    //Case3: current has both children
-    else{
+    // Case3: current has both children
+    else
+    {
         // Locate the rightmost node in the left subtree of
         // the current node and also its parent
         Node *parentOfRightMost = current;
-        Node* rightMost = current->left;
+        Node *rightMost = current->left;
 
-        while(rightMost->right != NULL){
+        while (rightMost->right != NULL)
+        {
             parentOfRightMost = rightMost;
-            rightMost = rightMost->right; //keep going right
+            rightMost = rightMost->right; // keep going right
         }
+        current->data = rightMost->data;
+
+        if(parentOfRightMost->right == rightMost)
+            parentOfRightMost->right = NULL;
+        else
+            parentOfRightMost->right = NULL;
+
+        delete rightMost;
     }
-    delete temp;
 }
 
-//if root has both childs then swap minValueNode from right subtree and delete it
+// if root has both childs then replace minValueNode from right subtree and delete it
 Node *removeNode(Node *root, int key)
 {
     if (!root)
@@ -126,21 +145,21 @@ Node *removeNode(Node *root, int key)
 
     else
     {
-        //case if root has right child
+        // case if root has right child
         if (root->left == NULL)
         {
             Node *temp = root->right;
             delete root;
             return temp;
         }
-        //case if root has left child
+        // case if root has left child
         else if (root->right == NULL)
         {
             Node *temp = root->left;
             delete root;
             return temp;
         }
-        //case if root has both children
+        // case if root has both children
         Node *temp = minValueNode(root->right);
         root->data = temp->data;
         root->right = removeNode(root->right, temp->data);
@@ -179,17 +198,22 @@ int main()
     inOrder(root);
     cout << "\n\n";
 
-    root = removeNode(root, 50);
-    root = removeNode(root, 80);
-    root = removeNode(root, 30);
+    // root = removeNode(root, 50);
+    // root = removeNode(root, 80);
+    // root = removeNode(root, 30);
+    removeNodeItr(root, 50);
+    removeNodeItr(root, 80);
+    removeNodeItr(root, 30);
     print(root);
-    
+
     cout << "\n";
     cout << "***************************";
     cout << "\n";
 
-    root = removeNode(root, 60);
-    root = removeNode(root, 70);
+    // root = removeNode(root, 60);
+    // root = removeNode(root, 70);
+    removeNodeItr(root, 60);
+    removeNodeItr(root, 70);
 
     print(root);
     cout << "inorder :\n";
