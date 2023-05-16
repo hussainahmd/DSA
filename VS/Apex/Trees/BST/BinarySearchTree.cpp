@@ -42,22 +42,49 @@ void insertItr(Node *&root, int item)
 
 //*******************************************************************//
 
-Node *removeNodeItr(Node *root, int key)
+void removeNodeItr(Node *root, int key)
 {
     if (!root)
     {
         cout << "Tree is empty!\n";
-        return NULL;
+        return;
     }
-    Node *previous, *current = root;
+    Node *parent = NULL, *current = root;
 
-    while (!current && current->data != key)
+    while (current != NULL)
     {
-        if (key < current->data)
+        if (key < current->data){
+            parent = current;
             current = current->left;
+        }
 
-        if (key > current->data)
+        else if (key > current->data){
+            parent = current;
             current = current->right;
+        }
+        else
+            break; //Element found in the tree at current pointer
+    }
+    if(current == NULL){
+        cout << "Key not found\n";
+        return;
+    }
+
+    //Case1: current has no left child
+    if(current->left == NULL){
+
+        Node *temp = current;
+        if(parent == NULL){
+            root = current->right;
+        }
+        else{
+            if(key < parent->data)
+                parent->left = current->right;
+            else
+                parent->right = current->right;
+        }
+        delete temp;
+            
     }
 }
 
