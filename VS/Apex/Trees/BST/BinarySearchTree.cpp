@@ -42,7 +42,7 @@ void insertItr(Node *&root, int item)
 
 //*******************************************************************//
 
-void removeNodeItr(Node *root, int key)
+void removeNodeItr(Node *&root, int key)
 {
     if (!root)
     {
@@ -123,9 +123,9 @@ void removeNodeItr(Node *root, int key)
         current->data = rightMost->data;
 
         if(parentOfRightMost->right == rightMost)
-            parentOfRightMost->right = NULL;
+            parentOfRightMost->right = rightMost->left;
         else
-            parentOfRightMost->right = NULL;
+            parentOfRightMost->left = rightMost->left;
 
         delete rightMost;
     }
@@ -198,12 +198,12 @@ int main()
     inOrder(root);
     cout << "\n\n";
 
-    // root = removeNode(root, 50);
-    // root = removeNode(root, 80);
-    // root = removeNode(root, 30);
-    removeNodeItr(root, 50);
-    removeNodeItr(root, 80);
-    removeNodeItr(root, 30);
+    root = removeNode(root, 50);
+    root = removeNode(root, 80);
+    root = removeNode(root, 30);
+    // removeNodeItr(root, 50);
+    // removeNodeItr(root, 80);
+    // removeNodeItr(root, 30);
     print(root);
 
     cout << "\n";

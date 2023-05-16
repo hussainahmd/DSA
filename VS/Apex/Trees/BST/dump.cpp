@@ -1,5 +1,23 @@
 #include"C:\Users\Hussain\Desktop\DSA\VS\Apex\Trees\base.h"
 
+void removeMinFromRightSubtree(Node *root){
+    Node *parentOfLeftMost = root;
+    Node *leftMost = root->right; //leftmost from right subtree
+
+    while(leftMost->left != NULL){
+        parentOfLeftMost = leftMost;
+        leftMost = leftMost->left;
+    }
+    root->data = leftMost->data;
+
+    if(parentOfLeftMost->left == leftMost)
+        parentOfLeftMost->left = leftMost->right;
+    else
+        parentOfLeftMost->right = leftMost->right;
+    
+    delete leftMost;
+}
+
 void removeUtil(Node *prev, Node *root, int key){
     if(!root)
         return;
