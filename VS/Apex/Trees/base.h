@@ -55,7 +55,7 @@ Node *minValueNode(Node *&root)
     Node *current = root;
 
     // Loop down to find the leftmost leaf
-    while (current != NULL && current->left != NULL)
+    while (current->left != NULL)
         current = current->left;
 
     return current;
@@ -65,8 +65,8 @@ Node *maxValueNode(Node *&root)
 {
     Node *current = root;
 
-    // Loop down to find the leftmost leaf
-    while (current != NULL && current->right != NULL)
+    // Loop down to find the rightmost leaf
+    while (current->right != NULL)
         current = current->right;
 
     return current;
