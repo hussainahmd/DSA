@@ -75,37 +75,24 @@ Node *removeNode(Node *root, int key)
 
     else
     {
-        if (root->left == NULL && root->right != NULL)
+        //case if root has right child
+        if (root->left == NULL)
         {
             Node *temp = root->right;
             delete root;
             return temp;
         }
-        else if (root->right == NULL && root->left != NULL)
+        //case if root has left child
+        else if (root->right == NULL)
         {
-            //this is fine but not for the below case
-            /* Node *temp = root->left;
+            Node *temp = root->left;
             delete root;
-            return temp;*/
-
-            //if main(topmost) root->right is NULL then swap the max node from left subtree
-            //else, normal case that is to remove from right subtree
-            Node *temp = maxValueNode(root->left);
-            root->data = temp->data;
-            root->left = removeNode(root->left, temp->data);
-            return root;
-            
+            return temp;
         }
-        else if (root->right == NULL && root->left == NULL)
-        {
-            delete root;
-            return NULL;
-        }
-
+        //case if root has both children
         Node *temp = minValueNode(root->right);
         root->data = temp->data;
         root->right = removeNode(root->right, temp->data);
-        return root;
     }
     return root;
 }
@@ -141,9 +128,17 @@ int main()
     inOrder(root);
     cout << "\n\n";
 
-    removeNode(root, 50);
-    //removeNode(root, 80);
-    //root = removeNode(root, 30);
+    root = removeNode(root, 50);
+    root = removeNode(root, 80);
+    root = removeNode(root, 30);
+    print(root);
+    
+    cout << "\n";
+    cout << "***************************";
+    cout << "\n";
+
+    root = removeNode(root, 60);
+    root = removeNode(root, 70);
 
     print(root);
     cout << "inorder :\n";
