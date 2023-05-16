@@ -70,10 +70,10 @@ void removeNodeItr(Node *root, int key)
         return;
     }
 
+    Node *temp = current;
     //Case1: current has no left child
     if(current->left == NULL){
 
-        Node *temp = current;
         if(parent == NULL){
             root = current->right;
         }
@@ -83,9 +83,33 @@ void removeNodeItr(Node *root, int key)
             else
                 parent->right = current->right;
         }
-        delete temp;
-            
     }
+    //Case2: current has no right child
+    else if(current->right == NULL){
+
+        if(parent == NULL){
+            root = current->left;
+        }
+        else{
+            if(key < parent->data)
+                parent->left = current->left;
+            else
+                parent->right = current->left;
+        }   
+    }
+    //Case3: current has both children
+    else{
+        // Locate the rightmost node in the left subtree of
+        // the current node and also its parent
+        Node *parentOfRightMost = current;
+        Node* rightMost = current->left;
+
+        while(rightMost->right != NULL){
+            parentOfRightMost = rightMost;
+            rightMost = rightMost->right; //keep going right
+        }
+    }
+    delete temp;
 }
 
 //if root has both childs then swap minValueNode from right subtree and delete it
