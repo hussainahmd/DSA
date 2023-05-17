@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <vector>
 using namespace std;
 
 #define SIZE 20
@@ -39,7 +38,7 @@ int deQ()
     return temp;
 }
 
-void enQx(int item)
+void enQx(int item)//with array
 {
     if (isFull())
     {
@@ -61,7 +60,7 @@ void enQx(int item)
 
     cout << "Item inserted : " << item << "\n";
 }
-void enQ(int item)
+void enQ(int item)//with vector
 {
     if (isFull())
     {
