@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <vector>
 using namespace std;
 
 #define SIZE 10
@@ -54,17 +53,19 @@ void enQ(int item)
     }
     else
     {
-        int s = rear - front + 1;
+        int queueSize = rear - front + 1;
         vector<int> vec;
-        for (int i = 0; i < s; i++)
+        for (int i = 0; i < queueSize; i++)
         {
             vec.push_back(deQ());
         }
+        //queue is empty right now
         front = 0;
         rear++;
-        items[rear] = item;
+        items[rear] = item; //insert the new item at front
         for (int i = 0; i < vec.size(); i++)
         {
+            //insert all the previous items
             rear++;
             items[rear] = vec[i];
         }

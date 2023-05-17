@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include<stack>
+#include <stack>
 using namespace std;
 
 struct Node

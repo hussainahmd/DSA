@@ -58,6 +58,7 @@
     "shared_mutex": "cpp",
     "utility": "cpp",
     "valarray": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "vector": "cpp"
   }
 }
