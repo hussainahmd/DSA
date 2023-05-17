@@ -6,6 +6,7 @@ int tree[SIZE], treeSize = 0;
 
 void shift_up(int currentIndex)
 {
+    //while not the top most node (root) of the tree
     while (currentIndex > 0)
     {
         int parentIndex = (currentIndex - 1) / 2;
@@ -17,6 +18,7 @@ void shift_up(int currentIndex)
             tree[currentIndex] = tree[parentIndex];
             tree[parentIndex] = temp;
 
+            //shift current to the parent and check again
             currentIndex = parentIndex;
         }
         else
@@ -33,12 +35,17 @@ void shift_down()
         int leftChildIndex = 2 * currentIndex + 1;
         int rightChildIndex = 2 * currentIndex + 2;
 
+        //if left child does not exist then right does not exist
+        //so reached end of the tree
         if (leftChildIndex >= treeSize)
             break; // The tree is a heap
 
+        //assuming left child is greater than the right
         int maxIndex = leftChildIndex;
-        if (rightChildIndex < treeSize)
+
+        if (rightChildIndex < treeSize)//check if right child exists
         {
+            //if right child is greater than left, max = right child
             if (tree[maxIndex] < tree[rightChildIndex])
             {
                 maxIndex = rightChildIndex;
@@ -57,7 +64,6 @@ void shift_down()
         else
             break; // The tree is a heap
     }
-    
 }
 
 void insert(int item)
@@ -75,7 +81,7 @@ void insert(int item)
     treeSize++;
 }
 
-int remove()
+int remove() //remove root of the tree
 {
     if (treeSize <= 0)
     {
@@ -93,10 +99,5 @@ int remove()
 
 int main()
 {
-    vector<int> heapTree;
-    for (int i = 0; i < 5; i++)
-    {
-        heapTree.push_back(10 + i);
-    }
-    cout << heapTree.at(4);
+    
 }
