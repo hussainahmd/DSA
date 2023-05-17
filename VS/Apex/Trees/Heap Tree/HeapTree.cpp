@@ -4,6 +4,30 @@ using namespace std;
 #define SIZE 10
 int tree[SIZE], treeSize = 0;
 
+void shift_up(int index, int item)
+{
+    tree[index] = item;
+    
+    int currentIndex = index;
+    while (currentIndex > 0)
+    {
+        int parentIndex = (currentIndex - 1) / 2;
+
+        if (tree[currentIndex] > tree[parentIndex])
+        {
+            // swap
+            int temp = tree[currentIndex];
+            tree[currentIndex] = tree[parentIndex];
+            tree[parentIndex] = temp;
+
+            currentIndex = parentIndex;
+        }
+        else
+            break; // the tree is a heap now
+    }
+
+}
+
 void insert(int item)
 {
     if (treeSize == SIZE)
@@ -30,7 +54,7 @@ void insert(int item)
         else
             break; // the tree is a heap now
     }
-    treeSize++; //increment tree size
+    treeSize++; // increment tree size
 }
 
 int remove()
@@ -51,7 +75,7 @@ int remove()
         int rightChildIndex = 2 * currentIndex + 2;
 
         if (leftChildIndex >= treeSize)
-            break; //The tree is a heap
+            break; // The tree is a heap
 
         int maxIndex = leftChildIndex;
         if (rightChildIndex < treeSize)
@@ -72,7 +96,7 @@ int remove()
             currentIndex = maxIndex;
         }
         else
-            break; //The tree is a heap
+            break; // The tree is a heap
     }
     return removedNode;
 }
