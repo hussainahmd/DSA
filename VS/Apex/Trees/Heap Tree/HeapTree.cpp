@@ -150,7 +150,7 @@ int removeRoot() // remove root of the tree
 void inorder(int current)
 {
     if(treeSize < 1){
-        cout << "Tree is empty\n";
+        cout << "Tree is empty!\n";
         return;
     }
     int left = 2 * current + 1;
