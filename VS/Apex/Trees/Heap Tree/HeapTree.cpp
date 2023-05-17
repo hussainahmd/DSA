@@ -4,11 +4,8 @@ using namespace std;
 #define SIZE 10
 int tree[SIZE], treeSize = 0;
 
-void shift_up(int index, int item)
+void shift_up(int currentIndex)
 {
-    tree[index] = item;
-    
-    int currentIndex = index;
     while (currentIndex > 0)
     {
         int parentIndex = (currentIndex - 1) / 2;
@@ -28,46 +25,8 @@ void shift_up(int index, int item)
 
 }
 
-void insert(int item)
+void shift_down()
 {
-    if (treeSize == SIZE)
-    {
-        cout << "Overflowed!\n";
-        return;
-    }
-    int currentIndex = treeSize;
-    tree[currentIndex] = item;
-
-    while (currentIndex > 0)
-    {
-        int parentIndex = (currentIndex - 1) / 2;
-
-        if (tree[currentIndex] > tree[parentIndex])
-        {
-            // swap
-            int temp = tree[currentIndex];
-            tree[currentIndex] = tree[parentIndex];
-            tree[parentIndex] = temp;
-
-            currentIndex = parentIndex;
-        }
-        else
-            break; // the tree is a heap now
-    }
-    treeSize++; // increment tree size
-}
-
-int remove()
-{
-    if (treeSize <= 0)
-    {
-        cout << "Tree is empty!\n";
-        return -404;
-    }
-    int removedNode = tree[0];
-    tree[0] = tree[treeSize - 1];
-    treeSize--;
-
     int currentIndex = 0;
     while (currentIndex < treeSize)
     {
@@ -98,6 +57,37 @@ int remove()
         else
             break; // The tree is a heap
     }
+    
+}
+
+void insert(int item)
+{
+    if (treeSize == SIZE)
+    {
+        cout << "Overflowed!\n";
+        return;
+    }
+    int currentIndex = treeSize;
+    tree[currentIndex] = item;
+
+    shift_up(currentIndex);
+
+    treeSize++;
+}
+
+int remove()
+{
+    if (treeSize <= 0)
+    {
+        cout << "Tree is empty!\n";
+        return -404;
+    }
+    int removedNode = tree[0];
+    tree[0] = tree[treeSize - 1];
+    treeSize--;
+
+    shift_down();
+
     return removedNode;
 }
 
