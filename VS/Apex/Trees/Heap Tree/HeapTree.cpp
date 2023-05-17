@@ -1,12 +1,63 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define SIZE 10
+//*******************************************
+void menu();
+void shift_up(int);
+void shift_down();
+void insert(int);
+int removeRoot();
+void inorder(int);
+//*******************************************
+
+#define SIZE 30
 int tree[SIZE], treeSize = 0;
+
+//*******************************************
+int main()
+{
+    int choice;
+    do
+    {
+        menu();
+        cin >> choice;
+        cout << endl;
+
+        switch (choice)
+        {
+        case 1:
+            int x;
+            cout << "Enter a number : ";
+            cin >> x;
+            insert(x);
+            cout << "Item inserted : " << x << "\n";
+            break;
+
+        case 2:
+        {
+            int y = removeRoot();
+            if(y != -404)
+                cout << "Item removed : " << y << "\n";
+        }
+            break;
+
+        case 3:
+            cout << "\nInorder : ";
+            inorder(0);
+            cout << "\n\n";
+            break;
+
+        default:
+            cout << "Thank You\n";
+        }
+        cout << endl;
+    } while (choice == 1 || choice == 2 || choice == 3);
+}
+//*******************************************
 
 void shift_up(int currentIndex)
 {
-    //while not the top most node (root) of the tree
+    // while not the top most node (root) of the tree
     while (currentIndex > 0)
     {
         int parentIndex = (currentIndex - 1) / 2;
@@ -18,13 +69,12 @@ void shift_up(int currentIndex)
             tree[currentIndex] = tree[parentIndex];
             tree[parentIndex] = temp;
 
-            //shift current to the parent and check again
+            // shift current to the parent and check again
             currentIndex = parentIndex;
         }
         else
             break; // the tree is a heap now
     }
-
 }
 
 void shift_down()
@@ -35,17 +85,17 @@ void shift_down()
         int leftChildIndex = 2 * currentIndex + 1;
         int rightChildIndex = 2 * currentIndex + 2;
 
-        //if left child does not exist then right does not exist
-        //so reached end of the tree
+        // if left child does not exist then right does not exist
+        // so reached end of the tree
         if (leftChildIndex >= treeSize)
             break; // The tree is a heap
 
-        //assuming left child is greater than the right
+        // assuming left child is greater than the right
         int maxIndex = leftChildIndex;
 
-        if (rightChildIndex < treeSize)//check if right child exists
+        if (rightChildIndex < treeSize) // check if right child exists
         {
-            //if right child is greater than left, max = right child
+            // if right child is greater than left, max = right child
             if (tree[maxIndex] < tree[rightChildIndex])
             {
                 maxIndex = rightChildIndex;
@@ -81,7 +131,7 @@ void insert(int item)
     treeSize++;
 }
 
-int remove() //remove root of the tree
+int removeRoot() // remove root of the tree
 {
     if (treeSize <= 0)
     {
@@ -97,7 +147,44 @@ int remove() //remove root of the tree
     return removedNode;
 }
 
-int main()
+void inorder(int current)
 {
-    
+    if(treeSize < 1){
+        cout << "Tree is empty\n";
+        return;
+    }
+    int left = 2 * current + 1;
+    int right = 2 * current + 2;
+
+    //if the current node has left child, inorder left
+    if (left < treeSize)
+    {
+        inorder(left);
+    }
+    //if left node does not exist then right also not exists
+    //so print the value of node and return
+    else
+    {
+        cout << tree[current] << " ";
+        return;
+    }
+
+    //print the value of current node
+    cout << tree[current] << " ";
+
+    //if the current has right child, inorder right else return
+    if (right < treeSize)
+    {
+        inorder(right);
+    }
+}
+
+void menu()
+{
+    cout << "---------MaxHeap---------\n"
+         << "1. Insert a value\n"
+         << "2. Remove root\n"
+         << "3. Display inorder\n"
+         << ".. Any other key to Quit\n"
+         << "Your option ? : ";
 }
