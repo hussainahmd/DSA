@@ -42,9 +42,9 @@ int main()
             break;
 
         case 3:
-            cout << "\nInorder : ";
+            cout << "Inorder : ";
             inorder(0);
-            cout << "\n\n";
+            cout << "\n";
             break;
 
         default:
