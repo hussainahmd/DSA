@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define SIZE 10
+#define SIZE 20
 int items[SIZE], front = -1, rear = -1;
 
 bool isEmpty()
@@ -38,6 +38,28 @@ int deQ()
     return temp;
 }
 
+void enQx(int item)//with array
+{
+    if (isFull())
+    {
+        cout << "Error! Queue is full\n";
+        return;
+    }
+    if (isEmpty())
+        front = 0;
+
+    int s = rear - front + 1;
+    rear++;
+    items[rear] = item;
+
+    for (int i = 0; i < s; i++)
+    {
+        rear++;
+        items[rear] = deQ();
+    }
+
+    cout << "Item inserted : " << item << "\n";
+}
 void enQ(int item)
 {
     if (isFull())
@@ -86,20 +108,24 @@ void display()
     cout << "<-Rear\n\n";
 }
 
+void printArray()
+{
+    cout << "Array : ";
+    for (int i = 0; i < SIZE; i++)
+        cout << items[i] << " ";
+    cout << "\n";
+}
+
 int main()
 {
     enQ(1);
     enQ(2);
+    display();
+
     enQ(3);
     enQ(4);
     enQ(5);
     display();
 
-    cout << "Item removed : " << deQ() << "\n";
-    cout << "Item removed : " << deQ() << "\n";
-    display();
-
-    enQ(6);
-    enQ(7);
-    display();
+    printArray();
 }
