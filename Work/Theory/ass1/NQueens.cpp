@@ -13,12 +13,12 @@ int main()
     cin >> n;
     cout << "\n";
 
-    //initializing the board
-    int **arr = new int *[n];
+    //initializing the board dynamically
+    int **arr = new int *[n]; //pointer to an array
     for (int i = 0; i < n; i++)
     {
 
-        arr[i] = new int[n];
+        arr[i] = new int[n]; //create int array for each pointer
 
         for (int j = 0; j < n; j++)
         {
