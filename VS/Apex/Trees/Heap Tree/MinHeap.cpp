@@ -168,7 +168,7 @@ void inorder(int current)
         cout << tree[current] << " ";
         return;
     }
-
+    
     //print the value of current node
     cout << tree[current] << " ";
 
