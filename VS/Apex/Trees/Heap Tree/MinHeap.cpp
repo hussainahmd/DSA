@@ -14,6 +14,7 @@ void inorder(int);
 int tree[SIZE], treeSize = 0;
 
 //*******************************************
+
 int main()
 {
     int choice;
@@ -168,7 +169,7 @@ void inorder(int current)
         cout << tree[current] << " ";
         return;
     }
-    
+
     //print the value of current node
     cout << tree[current] << " ";
 
