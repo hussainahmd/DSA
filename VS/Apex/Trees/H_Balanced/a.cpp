@@ -2,6 +2,7 @@
 #include "C:\Users\Hussain\Desktop\DSA\VS\Apex\Trees\funcs_BT_BST.h"
 using namespace std;
 
+//*******************************************************************
 struct answer
 {
     int height;
@@ -32,6 +33,24 @@ answer* is_Balanced(Node *root)
         
     return new answer(current_height, false);
 }
+//*******************************************************************
+
+void insert(Node *&root, int item)
+{
+    if (root = NULL)
+    {
+        root = new Node(item);
+        return;
+    }
+
+    if (item < root->data)
+        insert(root->left, item);
+
+    if (item > root->data)
+        insert(root->right, item);
+}
+
+//*******************************************************************
 
 int main()
 {
