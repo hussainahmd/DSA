@@ -145,6 +145,19 @@ Node *removeNode(Node *root, int key)
 
     else
     {
+        // if (root->left == NULL || root->right == NULL)
+        // {
+        //     Node* temp = root->left ? root->left : root->right;
+
+        //     if (temp == NULL) {
+        //         temp = root;
+        //         root = NULL;
+        //     } else {
+        //         *root = *temp;
+        //     }
+        //     delete temp;
+        // }
+        
         // case if root has right child
         if (root->left == NULL)
         {
