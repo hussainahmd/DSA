@@ -60,6 +60,30 @@ int update_height(Node *root)
 
 //*******************************************************************
 
+Node *rotate_right(Node *root)
+{
+    Node *new_root = root->left;
+    root->left = new_root->right;
+    new_root->right = root;
+
+    root->height = update_height(root);
+    new_root->height = update_height(new_root);
+    return new_root;
+}
+
+Node *rotate_left(Node *root)
+{
+    Node *new_root = root->right;
+    root->right = new_root->left;
+    new_root->left = root;
+
+    root->height = update_height(root);
+    new_root->height = update_height(new_root);
+    return new_root;
+}
+
+//*******************************************************************
+
 Node *insert(Node *root, int item)
 {
     if (root == NULL)
@@ -74,7 +98,7 @@ Node *insert(Node *root, int item)
     else
         return root;
 
-    root->height = update_height(root); //max of (leftH, rightH) + 1
+    root->height = update_height(root); // max of (leftH, rightH) + 1
 
     int balanace_factor = balance_factor(root);
 
@@ -82,27 +106,23 @@ Node *insert(Node *root, int item)
     {
         if (item < root->left->data) // if item was inserted left->left
         {
-            Node *new_root = root->left;
-            root->left = new_root->right;
-            new_root->right = root;
-
-            root->height = update_height(root);
-            new_root->height = update_height(new_root);
-            return new_root;
+            return rotate_right(root);
         }
         else // if item was inserted left->right
         {
-            Node *new_root = root->left->right;
-            new_root->left = root->left;
-            root->left = new_root->right;
-            new_root->right = root;
-            new_root->left->right = NULL;
-            print(new_root);
+            root->left = rotate_left(root->left);
+            return rotate_right(root);
 
-            root->height = update_height(root);
-            new_root->left->height = update_height(new_root->left);
-            new_root->height = update_height(new_root);
-            return new_root;
+            // Node *new_root = root->left->right;
+            // new_root->left = root->left;
+            // root->left = new_root->right;
+            // new_root->right = root;
+            // new_root->left->right = NULL;
+
+            // root->height = update_height(root);
+            // new_root->left->height = update_height(new_root->left);
+            // new_root->height = update_height(new_root);
+            // return new_root;
         }
     }
 
@@ -110,27 +130,23 @@ Node *insert(Node *root, int item)
     {
         if (item > root->right->data) // if item was inserted right->right
         {
-            Node *new_root = root->right;
-            root->right = new_root->left;
-            new_root->left = root;
-
-            root->height = update_height(root);
-            new_root->height = update_height(new_root);
-            return new_root;
+            return rotate_left(root);
         }
         else // if item was inserted right->left
         {
-            Node *new_root = root->right->left;
-            new_root->right = root->right;
-            root->right = new_root->left;
-            new_root->left = root;
-            new_root->right->left = NULL;
-            print(new_root);
+            root->right = rotate_right(root->right);
+            return rotate_left(root);
 
-            root->height = update_height(root);
-            new_root->right->height = update_height(new_root->right);
-            new_root->height = update_height(new_root);
-            return new_root;
+            // Node *new_root = root->right->left;
+            // new_root->right = root->right;
+            // root->right = new_root->left;
+            // new_root->left = root;
+            // new_root->right->left = NULL;
+
+            // root->height = update_height(root);
+            // new_root->right->height = update_height(new_root->right);
+            // new_root->height = update_height(new_root);
+            // return new_root;
         }
     }
     return root;
@@ -140,22 +156,24 @@ Node *insert(Node *root, int item)
 
 int main()
 {
-    // Node *root = new Node(50);
-    // root->left = new Node(20);
-    // root->right = new Node(70);
-    // root->left->left = new Node(10);
-    // root->left->right = new Node(15);
-    
-    // root->right->right = new Node(90);
-    // root->right->left = new Node(80);
-    //root->left->left->left = new Node(5);
-
     Node *root = NULL;
     root = insert(root, 50);
     root = insert(root, 20);
     root = insert(root, 70);
     root = insert(root, 10);
     root = insert(root, 15);
+
+    // root = insert(root, 50);
+    // root = insert(root, 30);
+    // root = insert(root, 70);
+    // root = insert(root, 20);
+    // root = insert(root, 55);
+    // root = insert(root, 80);
+    // root = insert(root, 75);
+    // root = insert(root, 90);
+    // root = insert(root, 72);
+    // root = insert(root, 76);
+    // root = insert(root, 77);
 
     answer *ans = is_Balanced(root);
     if (ans->balanced)
