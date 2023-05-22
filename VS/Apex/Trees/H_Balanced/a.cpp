@@ -181,7 +181,7 @@ int main()
     else
         cout << "The tree is not height-balanced.\n";
 
-    cout << "The height of the tree is: " << ans->height;
+    cout << "The height of the tree is: " << ans->height << " " << height(root);
     cout << "\n\n******************************\n";
 
     print(root);
