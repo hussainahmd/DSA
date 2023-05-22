@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "C:\Users\Hussain\Desktop\DSA\VS\Apex\Trees\funcs_BT_BST.h"
+#include "base.h"
 using namespace std;
 
 //*******************************************************************
@@ -8,15 +8,16 @@ struct answer
     int height;
     bool balanced;
 
-    answer(int a, bool b){
+    answer(int a, bool b)
+    {
         height = a;
         balanced = b;
     }
 };
 
-answer* is_Balanced(Node *root)
+answer *is_Balanced(Node *root)
 {
-    if(root == NULL)
+    if (root == NULL)
         return new answer(0, true);
 
     answer *left_subtree = is_Balanced(root->left);
@@ -28,16 +29,33 @@ answer* is_Balanced(Node *root)
     int current_height = max(left_height, right_height) + 1;
     int height_diff = abs(left_height - right_height);
 
-    if(height_diff <= 1 && left_subtree->balanced && right_subtree->balanced)
+    if (height_diff <= 1 && left_subtree->balanced && right_subtree->balanced)
         return new answer(current_height, true);
-        
+
     return new answer(current_height, false);
 }
+
 //*******************************************************************
+
+int getHeight(Node *root)
+{
+    if (root == NULL)
+        return 0;
+
+    return root->height;
+}
+
+int balance_factor(Node *root)
+{
+    if (root == NULL)
+        return 0;
+
+    return getHeight(root->left) - getHeight(root->right);
+}
 
 void insert(Node *&root, int item)
 {
-    if (root = NULL)
+    if (root == NULL)
     {
         root = new Node(item);
         return;
@@ -46,8 +64,19 @@ void insert(Node *&root, int item)
     if (item < root->data)
         insert(root->left, item);
 
-    if (item > root->data)
+    else if (item > root->data)
         insert(root->right, item);
+
+    else
+        return;
+
+    root->height = max(getHeight(root->left), getHeight(root->right)) + 1;
+
+    int balanace_factor = balance_factor(root);
+
+    if (balanace_factor > 1)
+    {
+    }
 }
 
 //*******************************************************************
@@ -64,7 +93,7 @@ int main()
     root->left->left->left = new Node(5);
 
     answer *ans = is_Balanced(root);
-    if(ans->balanced)
+    if (ans->balanced)
         cout << "The tree is height-balanced.\n";
     else
         cout << "The tree is not height-balanced.\n";
