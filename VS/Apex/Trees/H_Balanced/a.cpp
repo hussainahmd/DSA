@@ -84,12 +84,16 @@ Node *remove(Node *root, int key)
             return temp;
         }
         // case if root has both children
-        Node *temp = minValueNode(root->right);
+        // Node *temp = minValueNode(root->right);
+        // root->data = temp->data;
+        // root->right = remove(root->right, temp->data);
+
+        Node *temp = maxValueNode(root->left);
         root->data = temp->data;
-        root->right = remove(root->right, temp->data);
+        root->left = remove(root->left, temp->data);
     }
 
-    // return from the node that was removed
+// if tree gets empty return
     if(root == NULL)
         return root;
 
@@ -98,11 +102,12 @@ Node *remove(Node *root, int key)
 
     if (balanace_factor > 1)
     {
-        if (balance_factor(root->left) >= 0) // if item was deleted left->left
+        // if left subtree is greater or equal to right subtree
+        if (balance_factor(root->left) >= 0) 
         {
             return rotate_right(root);
         }
-        else // if item was deleted left->right
+        else // if right subtree is greater
         {
             root->left = rotate_left(root->left);
             return rotate_right(root);
@@ -113,11 +118,12 @@ Node *remove(Node *root, int key)
 
     if (balanace_factor < -1)
     {
-        if (balance_factor(root->right) <= 0) // if item was deleted right->right
+        // if right subtree is greater or equal to left subtree
+        if (balance_factor(root->right) <= 0)
         {
             return rotate_left(root);
         }
-        else // if item was deleted right->left
+        else // if left subtree is greater
         {
             root->right = rotate_right(root->right);
             return rotate_left(root);
@@ -137,8 +143,8 @@ int main()
     root = insert(root, 50);
     root = insert(root, 20);
     root = insert(root, 70);
-    root = insert(root, 10);
-    root = insert(root, 15);
+    root = insert(root, 80);
+    root = insert(root, 90);
     //root = insert(root, 30);
 
     // root = insert(root, 50);
