@@ -3,63 +3,6 @@
 using namespace std;
 
 //*******************************************************************
-struct answer
-{
-    int height;
-    bool balanced;
-
-    answer(int a, bool b)
-    {
-        height = a;
-        balanced = b;
-    }
-};
-
-answer *is_Balanced(Node *root)
-{
-    if (root == NULL)
-        return new answer(0, true);
-
-    answer *left_subtree = is_Balanced(root->left);
-    answer *right_subtree = is_Balanced(root->right);
-
-    int left_height = left_subtree->height;
-    int right_height = right_subtree->height;
-
-    int current_height = max(left_height, right_height) + 1;
-    int height_diff = abs(left_height - right_height);
-
-    if (height_diff <= 1 && left_subtree->balanced && right_subtree->balanced)
-        return new answer(current_height, true);
-
-    return new answer(current_height, false);
-}
-
-//*******************************************************************
-
-Node *rotate_right(Node *root)
-{
-    Node *new_root = root->left;
-    root->left = new_root->right;
-    new_root->right = root;
-
-    root->height = update_height(root);
-    new_root->height = update_height(new_root);
-    return new_root;
-}
-
-Node *rotate_left(Node *root)
-{
-    Node *new_root = root->right;
-    root->right = new_root->left;
-    new_root->left = root;
-
-    root->height = update_height(root);
-    new_root->height = update_height(new_root);
-    return new_root;
-}
-
-//*******************************************************************
 
 Node *insert(Node *root, int item)
 {
@@ -90,7 +33,7 @@ Node *insert(Node *root, int item)
             root->left = rotate_left(root->left);
             return rotate_right(root);
 
-            //return rotate_left_right(root);
+            // return rotate_left_right(root);
         }
     }
 
@@ -105,7 +48,7 @@ Node *insert(Node *root, int item)
             root->right = rotate_right(root->right);
             return rotate_left(root);
 
-            //return rotate_right_left(root);
+            // return rotate_right_left(root);
         }
     }
     return root;
