@@ -116,3 +116,56 @@ void print(Node *&root)
 }
 
 //******************************************************************//
+
+int getHeight(Node *root)
+{
+    if (root == NULL)
+        return 0;
+
+    return root->height;
+}
+
+int balance_factor(Node *root)
+{
+    if (root == NULL)
+        return 0;
+
+    return getHeight(root->left) - getHeight(root->right);
+}
+
+int update_height(Node *root)
+{
+    return max(getHeight(root->left), getHeight(root->right)) + 1;
+}
+
+//******************************************************************//
+
+Node *rotate_left_right(Node *root)
+{
+    Node *new_root = root->left->right;
+    new_root->left = root->left;
+    root->left = new_root->right;
+    new_root->right = root;
+    new_root->left->right = NULL;
+
+    root->height = update_height(root);
+    new_root->left->height = update_height(new_root->left);
+    new_root->height = update_height(new_root);
+    return new_root;
+}
+
+Node *rotate_right_left(Node *root)
+{
+    Node *new_root = root->right->left;
+    new_root->right = root->right;
+    root->right = new_root->left;
+    new_root->left = root;
+    new_root->right->left = NULL;
+
+    root->height = update_height(root);
+    new_root->right->height = update_height(new_root->right);
+    new_root->height = update_height(new_root);
+    return new_root;
+}
+
+//******************************************************************//

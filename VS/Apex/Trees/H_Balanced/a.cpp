@@ -37,29 +37,6 @@ answer *is_Balanced(Node *root)
 
 //*******************************************************************
 
-int getHeight(Node *root)
-{
-    if (root == NULL)
-        return 0;
-
-    return root->height;
-}
-
-int balance_factor(Node *root)
-{
-    if (root == NULL)
-        return 0;
-
-    return getHeight(root->left) - getHeight(root->right);
-}
-
-int update_height(Node *root)
-{
-    return max(getHeight(root->left), getHeight(root->right)) + 1;
-}
-
-//*******************************************************************
-
 Node *rotate_right(Node *root)
 {
     Node *new_root = root->left;
@@ -113,16 +90,7 @@ Node *insert(Node *root, int item)
             root->left = rotate_left(root->left);
             return rotate_right(root);
 
-            // Node *new_root = root->left->right;
-            // new_root->left = root->left;
-            // root->left = new_root->right;
-            // new_root->right = root;
-            // new_root->left->right = NULL;
-
-            // root->height = update_height(root);
-            // new_root->left->height = update_height(new_root->left);
-            // new_root->height = update_height(new_root);
-            // return new_root;
+            //return rotate_left_right(root);
         }
     }
 
@@ -137,16 +105,7 @@ Node *insert(Node *root, int item)
             root->right = rotate_right(root->right);
             return rotate_left(root);
 
-            // Node *new_root = root->right->left;
-            // new_root->right = root->right;
-            // root->right = new_root->left;
-            // new_root->left = root;
-            // new_root->right->left = NULL;
-
-            // root->height = update_height(root);
-            // new_root->right->height = update_height(new_root->right);
-            // new_root->height = update_height(new_root);
-            // return new_root;
+            //return rotate_right_left(root);
         }
     }
     return root;
@@ -181,7 +140,7 @@ int main()
     else
         cout << "The tree is not height-balanced.\n";
 
-    cout << "The height of the tree is: " << ans->height << " " << height(root);
+    cout << "The height of the tree is: " << ans->height;
     cout << "\n\n******************************\n";
 
     print(root);
