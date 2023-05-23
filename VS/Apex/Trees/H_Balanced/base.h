@@ -40,38 +40,6 @@ Node *maxValueNode(Node *&root)
 
 //******************************************************************//
 
-void inOrder(Node *&root)
-{
-    if (!root)
-        return;
-
-    inOrder(root->left);
-    cout << root->data << " ";
-    inOrder(root->right);
-}
-
-void postOrder(Node *&root)
-{
-    if (!root)
-        return;
-
-    postOrder(root->left);
-    postOrder(root->right);
-    cout << root->data << " ";
-}
-
-void preOrder(Node *&root)
-{
-    if (!root)
-        return;
-
-    cout << root->data << " ";
-    preOrder(root->left);
-    preOrder(root->right);
-}
-
-//******************************************************************//
-
 int height(Node *&root)
 {
     if (!root)

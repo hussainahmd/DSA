@@ -56,6 +56,43 @@ Node *insert(Node *root, int item)
 
 //*******************************************************************
 
+Node *remove(Node *root, int key)
+{
+    if (!root)
+        return root;
+
+    if (key < root->data)
+        root->left = remove(root->left, key);
+
+    else if (key > root->data)
+        root->right = remove(root->right, key);
+
+    else
+    {
+        // case if root has right child
+        if (root->left == NULL)
+        {
+            Node *temp = root->right;
+            delete root;
+            return temp;
+        }
+        // case if root has left child
+        else if (root->right == NULL)
+        {
+            Node *temp = root->left;
+            delete root;
+            return temp;
+        }
+        // case if root has both children
+        Node *temp = minValueNode(root->right);
+        root->data = temp->data;
+        root->right = remove(root->right, temp->data);
+    }
+    return root;
+}
+
+//*******************************************************************
+
 int main()
 {
     Node *root = NULL;
