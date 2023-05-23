@@ -72,14 +72,16 @@ Node *remove(Node *root, int key)
         // case if root has right child
         if (root->left == NULL)
         {
-            root = root->right;
+            Node *temp = root->right;
             delete root;
+            return temp;
         }
         // case if root has left child
         else if (root->right == NULL)
         {
-            root = root->left;
+            Node *temp = root->left;
             delete root;
+            return temp;
         }
         // case if root has both children
         Node *temp = minValueNode(root->right);
@@ -137,6 +139,7 @@ int main()
     root = insert(root, 70);
     root = insert(root, 10);
     root = insert(root, 15);
+    //root = insert(root, 30);
 
     // root = insert(root, 50);
     // root = insert(root, 30);
@@ -157,7 +160,19 @@ int main()
         cout << "The tree is not height-balanced.\n";
 
     cout << "The height of the tree is: " << ans->height;
+
+    cout << "\n\n******************************\n";
+    print(root);
+
+    root = remove(root, 50);
     cout << "\n\n******************************\n";
 
+    answer *ans2 = is_Balanced(root);
+    if (ans2->balanced)
+        cout << "\nThe tree is height-balanced.\n";
+    else
+        cout << "The tree is not height-balanced.\n";
+
+    cout << "\n\n******************************\n";
     print(root);
 }
