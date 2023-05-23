@@ -72,22 +72,58 @@ Node *remove(Node *root, int key)
         // case if root has right child
         if (root->left == NULL)
         {
-            Node *temp = root->right;
+            root = root->right;
             delete root;
-            return temp;
         }
         // case if root has left child
         else if (root->right == NULL)
         {
-            Node *temp = root->left;
+            root = root->left;
             delete root;
-            return temp;
         }
         // case if root has both children
         Node *temp = minValueNode(root->right);
         root->data = temp->data;
         root->right = remove(root->right, temp->data);
     }
+
+    // return from the node that was removed
+    if(root == NULL)
+        return root;
+
+    root->height = update_height(root);
+    int balanace_factor = balance_factor(root);
+
+    if (balanace_factor > 1)
+    {
+        if (balance_factor(root->left) >= 0) // if item was deleted left->left
+        {
+            return rotate_right(root);
+        }
+        else // if item was deleted left->right
+        {
+            root->left = rotate_left(root->left);
+            return rotate_right(root);
+
+            // return rotate_left_right(root);
+        }
+    }
+
+    if (balanace_factor < -1)
+    {
+        if (balance_factor(root->right) <= 0) // if item was deleted right->right
+        {
+            return rotate_left(root);
+        }
+        else // if item was deleted right->left
+        {
+            root->right = rotate_right(root->right);
+            return rotate_left(root);
+
+            // return rotate_right_left(root);
+        }
+    }
+
     return root;
 }
 
