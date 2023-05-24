@@ -29,21 +29,22 @@ void addLast(Node *&head, int item)
 
 void mergeAlternate(Node *&list1, Node *&list2)
 {
-    Node *current1 = list1, *q;
-    Node *current2 = list2, *b;
+    Node *current1 = list1, *next1;
+    Node *current2 = list2, *next2;
 
     while (current1 != NULL && current2 != NULL)
     {
-        q = current1->next;
-        b = current2->next;
+        next1 = current1->next;
+        next2 = current2->next;
 
         current1->next = current2;
-        a->next = q;
+        current2->next = next1;
 
-        current1 = q;
-        a = b;
+        current1 = next1;
+        current2 = next2;
+
     }
-    list2 = a;
+    list2 = current2;
 }
 
 void display(Node *&head)
