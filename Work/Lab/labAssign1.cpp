@@ -30,7 +30,7 @@ void addLast(Node *&head, int item)
 void display(Node *&head)
 {
     if (head == NULL)
-        cout << "head is empty\n";
+        cout << "List is empty\n";
     else
     {
         Node *i = head;
