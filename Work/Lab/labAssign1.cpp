@@ -97,7 +97,7 @@ void findPrime(Node *&head)
     cout << "\n";
 }
 
-void merge(Node *list1, Node *list2) //merge list1 with list2
+void merge(Node *&list1, Node *&list2) //merge list1 with list2
 {
     if (list1 == NULL && list2 == NULL)
     {
@@ -111,7 +111,7 @@ void merge(Node *list1, Node *list2) //merge list1 with list2
     }
     if (list2 == NULL)
     {
-        return; // return nothing, keep list1
+        return; // keep list1
     }
 
     Node *p = list1;
@@ -126,12 +126,12 @@ int main()
     Node *l1 = NULL;
     Node *l2 = NULL;
 
-    // addLast(l1, 7);
-    // addLast(l1, 2);
-    // addLast(l1, 9);
-    // addLast(l1, 6);
-    // addLast(l1, 3);
-    // addLast(l1, 1);
+    addLast(l1, 7);
+    addLast(l1, 2);
+    addLast(l1, 9);
+    addLast(l1, 6);
+    addLast(l1, 3);
+    addLast(l1, 1);
 
     cout << "\nList1 unsorted : ";
     display(l1);
