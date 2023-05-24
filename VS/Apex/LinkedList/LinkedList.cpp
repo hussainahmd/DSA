@@ -278,7 +278,7 @@ void mergeAlternate(Node *&list1, Node *&list2)
     Node *current1 = list1, *next1;
     Node *current2 = list2, *next2;
 
-    while (current1 != NULL)
+    while (current1 != NULL && current1 != NULL)
     {
         next1 = current1->next;
         next2 = current2->next;
