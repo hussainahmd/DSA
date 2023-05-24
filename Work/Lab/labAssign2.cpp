@@ -29,7 +29,7 @@ void addLast(Node *&head, int item)
 
 void mergeAlternate(Node *&list1, Node *&list2)
 {
-    Node *p = list1, *q;
+    Node *current1 = list1, *q;
     Node *a = list2, *b;
 
     while (p != NULL && a != NULL)
