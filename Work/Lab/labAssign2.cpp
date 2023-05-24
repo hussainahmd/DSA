@@ -42,7 +42,6 @@ void mergeAlternate(Node *&list1, Node *&list2)
 
         current1 = next1;
         current2 = next2;
-
     }
     // list2 updatd as the remaining node(s)
     list2 = current2;
