@@ -32,7 +32,7 @@ void mergeAlternate(Node *&list1, Node *&list2)
     Node *p = list1, *q;
     Node *a = list2, *b;
 
-    while (p != NULL)
+    while (p != NULL && a != NULL)
     {
         q = p->next;
         b = a->next;
@@ -42,12 +42,6 @@ void mergeAlternate(Node *&list1, Node *&list2)
 
         p = q;
         a = b;
-
-        if (a == NULL)
-        {
-            list2 = a;
-            return;
-        }
     }
     list2 = a;
 }

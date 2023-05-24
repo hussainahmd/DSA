@@ -1,37 +1,43 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-struct Node{
+struct Node
+{
     int data;
-    struct Node *next;
+    Node *next = NULL;
 
-    Node(int item){
+    Node(int item)
+    {
         data = item;
-        next = NULL;
     }
 };
 
-void addLast(Node *&head, int item){
+void addLast(Node *&head, int item)
+{
     Node *node = new Node(item);
-    if(head == NULL){
+    if (head == NULL)
+    {
         head = node;
         return;
     }
     Node *p = head;
-    while(p->next != NULL)
+    while (p->next != NULL)
         p = p->next;
 
     p->next = node;
 }
 
-void display(Node *&head){
-    if(head == NULL)
+void display(Node *&head)
+{
+    if (head == NULL)
         cout << "head is empty\n";
-    else{
+    else
+    {
         Node *i = head;
         int size = 0;
         cout << "[";
-        while(i != NULL){
+        while (i != NULL)
+        {
             cout << i->data << " -> ";
             i = i->next;
             size++;
@@ -40,16 +46,18 @@ void display(Node *&head){
     }
 }
 
-void sortList(Node *&head){
+void sortList(Node *&head)
+{
     Node *p = head, *q;
 
-    while(p != NULL){
-
+    while (p != NULL)
+    {
         q = p->next;
 
-        while(q != NULL){
-
-            if(p->data > q->data){
+        while (q != NULL)
+        {
+            if (p->data > q->data)
+            {
                 int temp = p->data;
                 p->data = q->data;
                 q->data = temp;
@@ -58,25 +66,30 @@ void sortList(Node *&head){
         }
         p = p->next;
     }
-
 }
 
-bool isPrimeNum(int n){
-    if(n <= 1)
+bool isPrimeNum(int n)
+{
+    if (n <= 1)
         return false;
-    else{
-        for(int i = 2; i < n; i++){
-            if(n % i == 0)
+    else
+    {
+        for (int i = 2; i < n; i++)
+        {
+            if (n % i == 0)
                 return false;
         }
         return true;
     }
 }
 
-void findPrime(Node *&head){
+void findPrime(Node *&head)
+{
     Node *p = head;
-    while(p != NULL){
-        if(isPrimeNum(p->data)){
+    while (p != NULL)
+    {
+        if (isPrimeNum(p->data))
+        {
             cout << p->data << "  ";
         }
         p = p->next;
@@ -84,30 +97,41 @@ void findPrime(Node *&head){
     cout << "\n";
 }
 
-void merge(Node *list1, Node *list2){
-    if(list1 == NULL && list2 == NULL){
+void merge(Node *list1, Node *list2) //merge list1 with list2
+{
+    if (list1 == NULL && list2 == NULL)
+    {
         cout << "Error! Lists are empty\n";
         return;
     }
-    if(list1 == NULL){
+    if (list1 == NULL)
+    {
         list1 = list2;
         return;
     }
+    if (list2 == NULL)
+    {
+        return; // return nothing, keep list1
+    }
 
     Node *p = list1;
-    while(p->next != NULL)
+    while (p->next != NULL)
         p = p->next;
 
     p->next = list2;
 }
 
-int main(){
+int main()
+{
     Node *l1 = NULL;
     Node *l2 = NULL;
 
-    addLast(l1, 7);addLast(l1, 2);
-    addLast(l1, 9);addLast(l1, 6);
-    addLast(l1, 3);addLast(l1, 1);
+    // addLast(l1, 7);
+    // addLast(l1, 2);
+    // addLast(l1, 9);
+    // addLast(l1, 6);
+    // addLast(l1, 3);
+    // addLast(l1, 1);
 
     cout << "\nList1 unsorted : ";
     display(l1);
@@ -121,9 +145,12 @@ int main(){
 
     cout << "\n";
 
-    addLast(l2, 6);addLast(l2, 2);
-    addLast(l2, 2);addLast(l2, 3);
-    addLast(l2, 1);addLast(l2, 4);
+    addLast(l2, 6);
+    addLast(l2, 2);
+    addLast(l2, 2);
+    addLast(l2, 3);
+    addLast(l2, 1);
+    addLast(l2, 4);
 
     cout << "List2 : ";
     display(l2);
