@@ -94,7 +94,7 @@ int main()
 
     if (l2 == NULL)
     {
-        cout << "List2 is empty\n";
+        cout << "List2 is empty!\n";
     }
     else
     {
