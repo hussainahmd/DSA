@@ -289,11 +289,6 @@ void mergeAlternate(Node *&list1, Node *&list2)
         current1 = next1;
         current2 = next2;
 
-        if (current2 == NULL)
-        {
-            list2 = current2;
-            return;
-        }
     }
     list2 = current2;
 }
