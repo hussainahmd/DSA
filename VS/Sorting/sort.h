@@ -5,15 +5,16 @@ void insertionSort(int arr[], int size)
 {
     for (int currIndex = 1; currIndex < size; currIndex++)
     {
+        int temp = arr[currIndex];
         int prevIndex = currIndex - 1;
 
-        while (prevIndex >= 0 && arr[currIndex] < arr[prevIndex])
+        while (prevIndex >= 0 && temp < arr[prevIndex])
         {
             arr[prevIndex + 1] = arr[prevIndex];
             prevIndex--;
         }
 
-        arr[prevIndex + 1] = arr[currIndex];
+        arr[prevIndex + 1] = temp;
     }
 }
 
@@ -27,7 +28,7 @@ void selectionSort(int arr[], int size)
         // find the min value in the array
         for(int nextIndex = currIndex + 1; nextIndex < size; nextIndex++)
         {
-            if(arr[nextIndex] < arr[currIndex])
+            if(arr[nextIndex] < temp) //
             {
                 minIndex = nextIndex;
                 temp = arr[nextIndex];
@@ -39,10 +40,10 @@ void selectionSort(int arr[], int size)
     }
 }
 
-void display(int arr[])
+void display(int arr[], int size)
 {   
-    int size = sizeof(arr) / sizeof(int);
-    cout << "Array : ";
+    // int size = sizeof(arr) / sizeof(int);
+    cout << "\nArray : ";
     for (int currIndex = 0; currIndex < size; currIndex++)
     {
         cout << arr[currIndex] << " ";
