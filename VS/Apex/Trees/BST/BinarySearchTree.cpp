@@ -17,7 +17,7 @@ void insert(Node *&root, int item)
 
 void insertItr(Node *&root, int item)
 {
-    if (!root)
+    if (root == NULL)
     {
         root = new Node(item);
         return;
