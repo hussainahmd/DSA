@@ -15,7 +15,7 @@ struct Node
     }
 };
 
-Node *sibling(Node *root)
+Node *getSibling(Node *root)
 {
     if(root->data > root->parent->data)
     {
@@ -23,6 +23,14 @@ Node *sibling(Node *root)
     }
     else
         return root->parent->right;
+}
+
+void recolor(Node *&root)
+{
+    if(root->color == 1)
+        root->color = 0;
+    else
+        root->color = 1;
 }
 
 Node* insertUtil(Node *root, int item)
@@ -52,13 +60,19 @@ Node* insertUtil(Node *root, int item)
 
     if(root->color == 0)
     {
-        if(sibling(root)->color == 1)
+        Node *sibling = getSibling(root);
+        if(sibling->color == 1)
         {
 
         }
         else // sibling(root)->color == 0
         {
+            root->color = 1;
+            sibling->color = 1;
 
+            // if parent of root is not the top root then recolor it 
+            if(root->parent->parent != NULL)
+                recolor(root->parent);
         }
     }
 }
