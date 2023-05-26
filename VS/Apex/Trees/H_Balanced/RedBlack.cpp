@@ -15,6 +15,16 @@ struct Node
     }
 };
 
+Node *sibling(Node *root)
+{
+    if(root->data > root->parent->data)
+    {
+        return root->parent->left;
+    }
+    else
+        return root->parent->right;
+}
+
 Node* insertUtil(Node *root, int item)
 {
     if(root == NULL)
@@ -42,7 +52,14 @@ Node* insertUtil(Node *root, int item)
 
     if(root->color == 0)
     {
-        
+        if(sibling(root)->color == 1)
+        {
+
+        }
+        else // sibling(root)->color == 0
+        {
+
+        }
     }
 }
 
