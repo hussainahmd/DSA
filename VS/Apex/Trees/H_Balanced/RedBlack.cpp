@@ -15,14 +15,6 @@ struct Node
     }
 };
 
-Node *add(Node *root, int item)
-{
-    if(root == NULL)
-    {
-
-    }
-}
-
 Node* insertUtil(Node *root, int item)
 {
     if(root == NULL)
