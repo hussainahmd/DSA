@@ -19,13 +19,14 @@ Node* insert(Node *parent, Node *root, int item)
 {
     if(root == NULL)
     {
+        Node *node = new Node(item);
         if(parent == NULL)
         {
-            Node *node = new Node(item);
             node->color = 1;
             return node;
         }
-        return new Node(item);
+        node->parent = parent;
+        return node;
     }
 
     if (item < root->data)
@@ -36,4 +37,18 @@ Node* insert(Node *parent, Node *root, int item)
 
     else
         return root;
+
+    if(parent->color == 1)
+        return root;
+}
+
+void insertNode(Node *root, int item)
+{
+    root = insert(NULL, root, item);
+}
+
+int main()
+{
+    Node *root = NULL;
+    insertNode(root, 50);
 }
