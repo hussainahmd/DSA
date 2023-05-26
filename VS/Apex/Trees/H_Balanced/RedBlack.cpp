@@ -15,40 +15,57 @@ struct Node
     }
 };
 
-Node* insert(Node *parent, Node *root, int item)
+Node *add(Node *root, int item)
 {
     if(root == NULL)
     {
-        Node *node = new Node(item);
-        if(parent == NULL)
-        {
-            node->color = 1;
-            return node;
-        }
-        node->parent = parent;
-        return node;
+
+    }
+}
+
+Node* insertUtil(Node *root, int item)
+{
+    if(root == NULL)
+    {
+        return new Node(item);
     }
 
     if (item < root->data)
-        root->left = insert(root, root->left, item);
+    {
+        root->left = insertUtil(root->left, item);
+        root->left->parent = root;
+    }
 
     else if (item > root->data)
-        root->right = insert(root, root->right, item);
+    {
+        root->right = insertUtil(root->right, item);
+        root->right->parent = root;
+    }
 
     else
         return root;
 
-    if(parent->color == 1)
+    if(root->color == 1)
         return root;
+
+    if(root->color == 0)
+    {
+        
+    }
 }
 
-void insertNode(Node *root, int item)
+void insert(Node *&root, int item)
 {
-    root = insert(NULL, root, item);
+    if(root == NULL){
+        root = new Node(item);
+        root->color = 1;
+    }
+    else
+        root = insertUtil(root, item);
 }
 
 int main()
 {
     Node *root = NULL;
-    insertNode(root, 50);
+    insert(root, 50);
 }
