@@ -44,9 +44,10 @@ int main()
         break;
 
         case 3:
-            cout << "\nSorted tree : ";
             sortHeap();
+            cout << "\nSorted tree : ";
             display();
+            treeSize = 0;
             cout << "\n";
             break;
         
@@ -175,6 +176,11 @@ void sortHeap()
 
 void display()
 {
+    if (treeSize < 1)
+    {
+        cout << "Tree is empty!\n";
+        return;
+    }
     for(int i = 0; i < treeSize; i++)
     {
         cout << tree[i] << " ";
