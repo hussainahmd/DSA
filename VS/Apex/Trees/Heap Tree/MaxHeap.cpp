@@ -8,6 +8,8 @@ void shift_down();
 void insert(int);
 int removeRoot();
 void inorder(int);
+void sortHeap();
+void display();
 //*******************************************
 
 #define SIZE 30
@@ -36,22 +38,35 @@ int main()
         case 2:
         {
             int y = removeRoot();
-            if(y != -404)
+            if (y != -404)
                 cout << "Item removed : " << y << "\n";
         }
-            break;
+        break;
 
         case 3:
+            cout << "\nSorted tree : ";
+            sortHeap();
+            display();
+            cout << "\n";
+            break;
+        
+        case 4:
             cout << "\nInorder : ";
             inorder(0);
             cout << "\n\n";
+            break;
+
+        case 5:
+            cout << "\nTree : ";
+            display();
+            cout << "\n";
             break;
 
         default:
             cout << "Thank You!\n";
         }
         cout << endl;
-    } while (choice == 1 || choice == 2 || choice == 3);
+    } while (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5);
 }
 //*******************************************
 
@@ -140,6 +155,7 @@ int removeRoot() // remove root of the tree
     }
     int removedNode = tree[0];
     tree[0] = tree[treeSize - 1];
+    tree[treeSize - 1] = removedNode;
     treeSize--;
 
     shift_down();
@@ -147,32 +163,52 @@ int removeRoot() // remove root of the tree
     return removedNode;
 }
 
+void sortHeap()
+{
+    int size = treeSize;
+    while (treeSize > 1)
+    {
+        removeRoot();
+    }
+    treeSize = size;
+}
+
+void display()
+{
+    for(int i = 0; i < treeSize; i++)
+    {
+        cout << tree[i] << " ";
+    }
+    cout << endl;
+}
+
 void inorder(int current)
 {
-    if(treeSize < 1){
+    if (treeSize < 1)
+    {
         cout << "Tree is empty!\n";
         return;
     }
     int left = 2 * current + 1;
     int right = 2 * current + 2;
 
-    //if the current node has left child, inorder left
+    // if the current node has left child, inorder left
     if (left < treeSize)
     {
         inorder(left);
     }
-    //if left node does not exist then right also not exists
-    //so print the value of node and return
+    // if left node does not exist then right also not exists
+    // so print the value of node and return
     else
     {
         cout << tree[current] << " ";
         return;
     }
 
-    //print the value of current node
+    // print the value of current node
     cout << tree[current] << " ";
 
-    //if the current has right child, inorder right else return
+    // if the current has right child, inorder right else return
     if (right < treeSize)
     {
         inorder(right);
@@ -184,7 +220,9 @@ void menu()
     cout << "---------MaxHeap---------\n"
          << "1. Insert a value\n"
          << "2. Remove root\n"
-         << "3. Display inorder\n"
+         << "3. Sort Max Heap\n"
+         << "4. Display inorder\n"
+         << "5. Display tree\n"
          << ".. Any other key to Quit\n"
          << "Your option ? : ";
 }
