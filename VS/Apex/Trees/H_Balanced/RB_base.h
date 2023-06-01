@@ -43,6 +43,11 @@ Node *rotate_right(Node *root)
     root->left = new_root->right;
     new_root->right = root;
 
+    root->parent = new_root;
+    if(root->left != NULL){
+        root->left->parent = root;
+    }
+
     return new_root;
 }
 
@@ -51,6 +56,11 @@ Node *rotate_left(Node *root)
     Node *new_root = root->right;
     root->right = new_root->left;
     new_root->left = root;
+
+    root->parent = new_root;
+    if(root->right != NULL){
+        root->right->parent = root;
+    }
 
     return new_root;
 }
