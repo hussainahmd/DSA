@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
-#include "base.h"
-using namespace std;
+#include "AVL_base.h"
 
 //*******************************************************************
 
@@ -103,7 +101,7 @@ Node *remove(Node *root, int key)
     if (balanace_factor > 1)
     {
         // if left subtree is greater or equal to right subtree
-        if (balance_factor(root->left) >= 0) 
+        if (balance_factor(root->left) >= 0)
         {
             return rotate_right(root);
         }
