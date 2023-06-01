@@ -49,7 +49,7 @@ int main(){
                 cout << "Invalid option";
         }
         cout << endl;
-    }while(choice != 1 || choice != 2 || choice != 3 || choice != 4);
+    }while(choice == 1 || choice == 2 || choice == 3 || choice == 4);
 
 
     return 0;
