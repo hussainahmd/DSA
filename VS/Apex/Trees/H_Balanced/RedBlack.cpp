@@ -37,7 +37,7 @@ Node* insertUtil(Node *root, int item)
                     recolor(root);
                     recolor(root->parent);
 
-                    rotate_left(root->parent);
+                    root = rotate_left(root->parent);
                 }
                 else // right->left
                 {
@@ -67,7 +67,6 @@ Node* insertUtil(Node *root, int item)
                 }
             }
 
-
         }
         else // sibling(root)->color == 0
         {
@@ -79,6 +78,7 @@ Node* insertUtil(Node *root, int item)
                 recolor(root->parent);
         }
     }
+    return root;
 }
 
 void insert(Node *&root, int item)
@@ -96,4 +96,12 @@ int main()
 {
     Node *root = NULL;
     insert(root, 50);
+    insert(root, 20);
+    insert(root, 70);
+    insert(root, 80);
+    //insert(root, 90);
+//    insert(root, 30);
+//    insert(root, 60);
+
+    print(root);
 }
