@@ -1,37 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-struct Node
-{
-    int data;
-    bool color = 0; // 0 = red, 1 = black
-    Node *parent = NULL;
-    Node *left = NULL;
-    Node *right = NULL;
-
-    Node(int item)
-    {
-        data = item;
-    }
-};
-
-Node *getSibling(Node *root)
-{
-    if(root->data > root->parent->data)
-    {
-        return root->parent->left;
-    }
-    else
-        return root->parent->right;
-}
-
-void recolor(Node *&root)
-{
-    if(root->color == 1)
-        root->color = 0;
-    else
-        root->color = 1;
-}
+#include "RB_base.h"
 
 Node* insertUtil(Node *root, int item)
 {
@@ -61,8 +28,45 @@ Node* insertUtil(Node *root, int item)
     if(root->color == 0)
     {
         Node *sibling = getSibling(root);
-        if(sibling->color == 1)
+        if(sibling == NULL || sibling->color == 1)
         {
+            if(root->data > root->parent->data)
+            {
+                if(item > root->right->data) // right->right
+                {
+                    recolor(root);
+                    recolor(root->parent);
+
+                    rotate_left(root->parent);
+                }
+                else // right->left
+                {
+                    recolor(root->parent);
+                    recolor(root->left);
+
+                    rotate_right(root);
+                    rotate_left(root->parent);
+                }
+            }
+            else // if(root->data < root->parent->data)
+            {
+                if(item < root->right->data) // left->left
+                {
+                    recolor(root);
+                    recolor(root->parent);
+
+                    rotate_right(root->parent);
+                }
+                else // left->right
+                {
+                    recolor(root->parent);
+                    recolor(root->right);
+
+                    rotate_left(root);
+                    rotate_right(root->parent);
+                }
+            }
+
 
         }
         else // sibling(root)->color == 0
@@ -70,7 +74,7 @@ Node* insertUtil(Node *root, int item)
             root->color = 1;
             sibling->color = 1;
 
-            // if parent of root is not the top root then recolor it 
+            // if parent of root is not the top root then recolor it
             if(root->parent->parent != NULL)
                 recolor(root->parent);
         }
@@ -86,6 +90,7 @@ void insert(Node *&root, int item)
     else
         root = insertUtil(root, item);
 }
+
 
 int main()
 {
