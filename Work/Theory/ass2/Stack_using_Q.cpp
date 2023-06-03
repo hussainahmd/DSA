@@ -38,7 +38,7 @@ int deQ()
     return temp;
 }
 
-void enQx(int item)//with array
+void enQx(int item) //with array
 {
     if (isFull())
     {
