@@ -7,6 +7,7 @@ int main()
 
     display(arr, size);
 
-    selectionSort(arr, size);
+    //selectionSort(arr, size);
+    quickSort(arr, 0, size - 1);
     display(arr, size);
 }
