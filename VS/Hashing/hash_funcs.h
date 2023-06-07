@@ -7,6 +7,7 @@ struct Item
     int key;
 };
 
-int main(){
+int main()
+{
     
 }
