@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Merge function to merge two sorted arrays
 void merge(int arr[], int leftIndex, int middleIndex, int rightIndex)
 {
     // Calculate the sizes of the left and right arrays
@@ -81,7 +80,7 @@ void mergeSort(int arr[], int startIndex, int endIndex)
 int partition(int arr[], int low, int high)
 {
     int pivot = arr[low]; // Select the first element as pivot
-    int left = low + 1;      // Start from the next element
+    int left = low + 1;   // Start from the next element
     int right = high;
 
     while (true)
