@@ -102,25 +102,19 @@ void shift_down()
         int leftChildIndex = 2 * currentIndex + 1;
         int rightChildIndex = 2 * currentIndex + 2;
 
-        // if left child does not exist then right does not exist
-        // so reached end of the tree
-        if (leftChildIndex >= treeSize)
-            break; // The tree is a heap
+        int maxIndex = currentIndex;
 
-        // assuming left child is greater than the right
-        int maxIndex = leftChildIndex;
-
-        if (rightChildIndex < treeSize) // check if right child exists
+        if (leftChildIndex < treeSize && tree[leftChildIndex] > tree[maxIndex])
         {
-            // if right child is greater than left, max = right child
-            if (tree[maxIndex] < tree[rightChildIndex])
-            {
-                maxIndex = rightChildIndex;
-            }
+            maxIndex = leftChildIndex; 
         }
 
-        // swap if current node is less than maximum
-        if (tree[currentIndex] < tree[maxIndex])
+        if (rightChildIndex < treeSize && tree[rightChildIndex] > tree[maxIndex])
+        {
+            maxIndex = rightChildIndex; 
+        }
+
+        if(maxIndex != currentIndex)
         {
             int temp = tree[currentIndex];
             tree[currentIndex] = tree[maxIndex];
@@ -129,7 +123,7 @@ void shift_down()
             currentIndex = maxIndex;
         }
         else
-            break; // The tree is a heap
+            break;
     }
 }
 
