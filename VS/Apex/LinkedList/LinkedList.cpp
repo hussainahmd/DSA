@@ -269,6 +269,70 @@ void sortList(Node *&head)
     }
 }
 
+void reverse(Node *head)
+{
+    if (!head)
+    {
+        cout << "List is empty\n";
+        return;
+    }
+    // o = previous, p = current, q = next
+    Node *o = NULL, *p = head, *q = NULL;
+    while (p != NULL)
+    {
+        q = p->next;
+        p->next = o;
+        o = p;
+        p = q;
+    }
+    head = o;
+}
+
+Node *getMid(Node *head)
+{
+    if (!head)
+    {
+        cout << "List is empty\n";
+        return NULL;
+    }
+    Node *slow = head, *fast = head;
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+Node *getKthFromLast2(Node *head, int k)
+{
+    if (!head)
+    {
+        cout << "List is empty\n";
+        return NULL;
+    }
+    Node *slow = head, *fast = head;
+    
+    while (fast != NULL && k--)
+        fast = fast->next;
+
+    if (fast != NULL)
+    {
+        while (fast != NULL)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        return slow;
+    }
+    else
+    {
+        cout << "Kth position does not exist\n";
+        return NULL;
+    }
+}
+
+
 bool isPrimeNum(int n)
 {
 
