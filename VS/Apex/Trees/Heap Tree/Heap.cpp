@@ -99,7 +99,6 @@ int remove(MaxHeap *ht)
     return removedNode;
 }
 
-
 void display(MaxHeap *ht)
 {
     if (ht->size < 1)
@@ -111,7 +110,22 @@ void display(MaxHeap *ht)
     {
         cout << ht->tree[i] << " ";
     }
-    cout << endl;
+    cout << "\n\n";
+}
+
+void sortHeap(MaxHeap *ht)
+{
+    int temp = ht->size;
+    while(ht->size > 1)
+    {
+        remove(ht);
+    }
+    ht->size = temp;
+
+    cout << "\nSorted : ";
+    display(ht);
+
+    ht->size = 0;
 }
 
 //*************************************************************
@@ -128,7 +142,7 @@ int main()
 
     display(ht);
 
-    remove(ht);
+    sortHeap(ht);
     display(ht);
 //     srand(67);
 

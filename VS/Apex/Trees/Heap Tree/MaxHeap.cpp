@@ -103,7 +103,7 @@ void shift_down(int currentIndex) //heapify
         int rightChildIndex = 2 * currentIndex + 2;
 
         int maxIndex = currentIndex;
-
+        
         if (leftChildIndex < treeSize && tree[leftChildIndex] > tree[maxIndex])
         {
             maxIndex = leftChildIndex; 
