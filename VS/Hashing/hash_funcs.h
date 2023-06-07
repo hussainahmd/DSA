@@ -6,3 +6,7 @@ struct Item
     int data;
     int key;
 };
+
+int main(){
+    
+}
