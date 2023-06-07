@@ -4,7 +4,7 @@ using namespace std;
 //*******************************************
 void menu();
 void shift_up(int);
-void shift_down();
+void shift_down(int);
 void insert(int);
 int removeRoot();
 void inorder(int);
@@ -94,9 +94,9 @@ void shift_up(int currentIndex)
     }
 }
 
-void shift_down()
+void shift_down(int currentIndex) //heapify
 {
-    int currentIndex = 0;
+    //int currentIndex = 0;
     while (currentIndex < treeSize)
     {
         int leftChildIndex = 2 * currentIndex + 1;
@@ -154,7 +154,7 @@ int removeRoot() // remove root of the tree
     tree[treeSize - 1] = removedNode;
     treeSize--;
 
-    shift_down();
+    shift_down(0);
 
     return removedNode;
 }

@@ -63,7 +63,10 @@
     "cstdio": "cpp",
     "forward_list": "cpp",
     "list": "cpp",
-    "deque": "cpp"
+    "deque": "cpp",
+    "string_view": "cpp",
+    "initializer_list": "cpp",
+    "regex": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
