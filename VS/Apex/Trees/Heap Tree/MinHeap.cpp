@@ -8,6 +8,7 @@ void shift_down();
 void insert(int);
 int removeRoot();
 void inorder(int);
+void display();
 //*******************************************
 
 #define SIZE 30
@@ -48,11 +49,17 @@ int main()
             cout << "\n";
             break;
 
+        case 4:
+            cout << "\nTree : ";
+            display();
+            cout << "\n";
+            break;
+
         default:
             cout << "Thank You\n";
         }
         cout << endl;
-    } while (choice == 1 || choice == 2 || choice == 3);
+    } while (choice == 1 || choice == 2 || choice == 3 || choice == 4);
 }
 //*******************************************
 
@@ -86,25 +93,19 @@ void shift_down()
         int leftChildIndex = 2 * currentIndex + 1;
         int rightChildIndex = 2 * currentIndex + 2;
 
-        // if left child does not exist then right does not exist
-        // so reached end of the tree
-        if (leftChildIndex >= treeSize)
-            break; // The tree is a heap
+        int minIndex = currentIndex;
 
-        // assuming left child is greater than the right
-        int minIndex = leftChildIndex;
-
-        if (rightChildIndex < treeSize) // check if right child exists
+        if (leftChildIndex < treeSize && tree[leftChildIndex] < tree[minIndex])
         {
-            // if right child is greater than left, max = right child
-            if (tree[minIndex] > tree[rightChildIndex])
-            {
-                minIndex = rightChildIndex;
-            }
+            minIndex = leftChildIndex; 
         }
 
-        // swap if current node is less than maximum
-        if (tree[currentIndex] > tree[minIndex])
+        if (rightChildIndex < treeSize && tree[rightChildIndex] < tree[minIndex])
+        {
+            minIndex = rightChildIndex; 
+        }
+
+        if(minIndex != currentIndex)
         {
             int temp = tree[currentIndex];
             tree[currentIndex] = tree[minIndex];
@@ -113,7 +114,7 @@ void shift_down()
             currentIndex = minIndex;
         }
         else
-            break; // The tree is a heap
+            break;
     }
 }
 
@@ -146,6 +147,20 @@ int removeRoot() // remove root of the tree
     shift_down();
 
     return removedNode;
+}
+
+void display()
+{
+    if (treeSize < 1)
+    {
+        cout << "Tree is empty!\n";
+        return;
+    }
+    for(int i = 0; i < treeSize; i++)
+    {
+        cout << tree[i] << " ";
+    }
+    cout << endl;
 }
 
 void inorder(int current)
@@ -186,6 +201,7 @@ void menu()
          << "1. Insert a value\n"
          << "2. Remove root\n"
          << "3. Display inorder\n"
+         << "4. Display tree\n"
          << ".. Any other key to Quit\n"
          << "Your option ? : ";
 }

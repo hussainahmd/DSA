@@ -4,7 +4,7 @@ using namespace std;
 //*******************************************
 void menu();
 void shift_up(int);
-void shift_down();
+void shift_down(int);
 void insert(int);
 int removeRoot();
 void inorder(int);
@@ -69,6 +69,7 @@ int main()
         cout << endl;
     } while (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5);
 }
+
 //*******************************************
 
 void shift_up(int currentIndex)
@@ -93,33 +94,27 @@ void shift_up(int currentIndex)
     }
 }
 
-void shift_down()
+void shift_down(int currentIndex) //heapify
 {
-    int currentIndex = 0;
+    //int currentIndex = 0;
     while (currentIndex < treeSize)
     {
         int leftChildIndex = 2 * currentIndex + 1;
         int rightChildIndex = 2 * currentIndex + 2;
 
-        // if left child does not exist then right does not exist
-        // so reached end of the tree
-        if (leftChildIndex >= treeSize)
-            break; // The tree is a heap
-
-        // assuming left child is greater than the right
-        int maxIndex = leftChildIndex;
-
-        if (rightChildIndex < treeSize) // check if right child exists
+        int maxIndex = currentIndex;
+        
+        if (leftChildIndex < treeSize && tree[leftChildIndex] > tree[maxIndex])
         {
-            // if right child is greater than left, max = right child
-            if (tree[maxIndex] < tree[rightChildIndex])
-            {
-                maxIndex = rightChildIndex;
-            }
+            maxIndex = leftChildIndex; 
         }
 
-        // swap if current node is less than maximum
-        if (tree[currentIndex] < tree[maxIndex])
+        if (rightChildIndex < treeSize && tree[rightChildIndex] > tree[maxIndex])
+        {
+            maxIndex = rightChildIndex; 
+        }
+
+        if(maxIndex != currentIndex)
         {
             int temp = tree[currentIndex];
             tree[currentIndex] = tree[maxIndex];
@@ -128,7 +123,7 @@ void shift_down()
             currentIndex = maxIndex;
         }
         else
-            break; // The tree is a heap
+            break;
     }
 }
 
@@ -159,7 +154,7 @@ int removeRoot() // remove root of the tree
     tree[treeSize - 1] = removedNode;
     treeSize--;
 
-    shift_down();
+    shift_down(0);
 
     return removedNode;
 }
