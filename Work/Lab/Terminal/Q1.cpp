@@ -104,7 +104,7 @@ void shift_up(MinHeap *ht, int currentIndex)
             ht->tree[currentIndex] = ht->tree[parentIndex];
             ht->tree[parentIndex] = temp;
 
-            // shift current to the parent an check again
+            // shift current to the parent and check again
             currentIndex = parentIndex;
         }
         else
