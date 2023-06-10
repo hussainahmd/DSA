@@ -32,7 +32,7 @@ bool isEmpty(Queue *q);
 bool isFull(Queue *q);
 void enQ(Queue *q, int item);
 int deQ(Queue *q);
-//******************************************************
+//*******************************************************
 
 int main()
 {
