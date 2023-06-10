@@ -403,6 +403,37 @@ void mergeAlternate(Node *&list1, Node *&list2)
     list2 = current2;
 }
 
+void removeNodeIfRightGreater(Node *head)
+{
+    for (Node *i = head; i != NULL;)
+    {
+        int value = i->data;
+        bool found = false;
+
+        for (Node *j = i->next; j != NULL; j = j->next)
+        {
+            if (j->data > value)
+            {
+                found = 1;
+                break;
+            }
+        }
+        if (found)
+        {
+            // delete node i
+            Node *temp = i->next;
+            i->data = i->next->data;
+            i->next = i->next->next;
+            delete temp;
+        }
+        else
+        {
+            i = i->next;
+        }
+    }
+}
+
+
 int main()
 {
     Node *l1 = NULL;
