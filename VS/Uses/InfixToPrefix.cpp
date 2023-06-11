@@ -12,7 +12,8 @@ bool priority(char, char);
 void infixToPrefix();
 
 //Main method
-int main(){
+int main()
+{
     try{
         infixToPrefix();
 
