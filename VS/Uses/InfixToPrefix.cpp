@@ -6,7 +6,7 @@ bool isValid(string);
 bool isOperand(char);
 bool isOperator(char);
 bool isOpBracket(char);
-bool isCloBracket(char);/
+bool isCloBracket(char);
 int precedence(char);
 bool priority(char, char);
 void infixToPrefix();
