@@ -12,7 +12,8 @@ bool priority(char, char);
 void infixToPostfix();
 
 //Main method
-int main(){
+int main()
+{
     try{
         infixToPostfix();
 
