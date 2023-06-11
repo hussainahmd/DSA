@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-bool isValid(string);/
+bool isValid(string);
 bool isOperand(char);
 bool isOperator(char);
 bool isOpBracket(char);
