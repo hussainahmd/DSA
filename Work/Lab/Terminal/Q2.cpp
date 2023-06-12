@@ -29,7 +29,6 @@ int main()
         int x = rand() % 67 + 1;
         addLast(list, x);
     }
-    // addLast(list, 12);addLast(list, 15);addLast(list, 10);addLast(list, 11);addLast(list, 5);addLast(list, 6);addLast(list, 2);addLast(list, 3);
     cout << "\nList before removing all nodes that have greater value on right side : \n";
     display(list);
 
