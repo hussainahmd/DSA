@@ -133,6 +133,34 @@ int removeLast(Node *&head)
     return data;
 }
 
+void removeDupes2(Node *&head)
+{
+    if (head == NULL)
+    {
+        cout << "Error! List is empty\n";
+        return;
+    }
+    Node *prev, *currNode = head, *nextNode;
+
+    while (currNode != NULL)
+    {
+        nextNode = currNode;
+        
+        while (nextNode->next != NULL)
+        {
+            if (currNode->data == nextNode->next->data)
+            {
+                Node *temp = nextNode->next;
+                nextNode->next = nextNode->next->next;
+                delete temp;
+            }
+            else
+                nextNode = nextNode->next;
+        }
+        currNode = currNode->next;
+    }
+}
+
 void removeDupes(Node *&head)
 {
     if (head == NULL)
@@ -140,16 +168,16 @@ void removeDupes(Node *&head)
         cout << "Error! List is empty\n";
         return;
     }
-    Node *prev, *curr = head, *next;
+    Node *prev, *currNode = head, *next;
 
-    while (curr != NULL)
+    while (currNode != NULL)
     {
-        next = curr->next;
-        prev = curr;
+        next = currNode->next;
+        prev = currNode;
 
         while (next != NULL)
         {
-            if (curr->data == next->data)
+            if (currNode->data == next->data)
             {
                 prev->next = next->next;
                 delete next;
@@ -158,7 +186,7 @@ void removeDupes(Node *&head)
             prev = next;
             next = next->next;
         }
-        curr = curr->next;
+        currNode = currNode->next;
     }
 }
 
