@@ -103,7 +103,7 @@ int partition(int arr[], int low, int high)
             break;
         }
 
-        // Swap arr[i] and arr[j] to maintain the partitioning
+        // Swap arr[left] and arr[right] to maintain the partitioning
         swap(arr[left], arr[right]);
     }
 
