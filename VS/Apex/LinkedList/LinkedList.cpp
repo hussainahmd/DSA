@@ -140,22 +140,22 @@ void removeDupes(Node *&head)
         cout << "Error! List is empty\n";
         return;
     }
-    Node *o, *p = head, *q;
+    Node *prev, *p = head, *q;
 
     while (p != NULL)
     {
         q = p->next;
-        o = p;
+        prev = p;
 
         while (q != NULL)
         {
             if (p->data == q->data)
             {
-                o->next = q->next;
+                prev->next = q->next;
                 delete q;
-                q = o;
+                q = prev;
             }
-            o = q;
+            prev = q;
             q = q->next;
         }
         p = p->next;
