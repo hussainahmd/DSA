@@ -133,7 +133,7 @@ int removeLast(Node *&head)
     return data;
 }
 
-void removeDupes2(Node *&head)
+void removeDupes(Node *&head)
 {
     if (head == NULL)
     {
