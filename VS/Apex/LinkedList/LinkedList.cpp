@@ -161,7 +161,7 @@ void removeDupes(Node *&head)
     }
 }
 
-void 
+voi
 
 int removePos(Node *&head, int k)
 { // node after pos
