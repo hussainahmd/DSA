@@ -161,34 +161,7 @@ void removeDupes(Node *&head)
     }
 }
 
-void removeDupes(Node *&head)
-{
-    if (head == NULL)
-    {
-        cout << "Error! List is empty\n";
-        return;
-    }
-    Node *prev, *currNode = head, *next;
-
-    while (currNode != NULL)
-    {
-        next = currNode->next;
-        prev = currNode;
-
-        while (next != NULL)
-        {
-            if (currNode->data == next->data)
-            {
-                prev->next = next->next;
-                delete next;
-                next = prev;
-            }
-            prev = next;
-            next = next->next;
-        }
-        currNode = currNode->next;
-    }
-}
+void 
 
 int removePos(Node *&head, int k)
 { // node after pos
