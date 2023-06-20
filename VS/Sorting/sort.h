@@ -83,6 +83,7 @@ int partition(int arr[], int low, int high)
     int left = low + 1;   // Start from the next element
     int right = high;
 
+    // If the pointers cross, break the loop
     while (left < right)
     {
         // Move the left pointer to the right until a larger element is found
