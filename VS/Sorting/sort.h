@@ -98,12 +98,6 @@ int partition(int arr[], int low, int high)
             right--;
         }
 
-        
-        if (left > right)
-        {
-            break;
-        }
-
         // Swap arr[left] and arr[right] to maintain the partitioning
         swap(arr[left], arr[right]);
     }
