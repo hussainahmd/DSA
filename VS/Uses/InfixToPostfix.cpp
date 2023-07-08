@@ -11,7 +11,6 @@ int precedence(char);
 bool priority(char, char);
 void infixToPostfix();
 
-// Main method
 int main()
 {
     try
