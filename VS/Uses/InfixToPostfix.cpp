@@ -25,7 +25,6 @@ int main()
 
 void infixToPostfix()
 {
-
     string s;
     cout << "\nEnter an Infix expression : ";
     getline(cin, s);
